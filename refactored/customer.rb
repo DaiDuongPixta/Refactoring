@@ -11,7 +11,7 @@ class Customer
   end
 
   def statement
-    total_amount, frequent_renter_points = 0, 0
+    total_amount = 0
     result = "Rental Record for #{@name} \n"
     @rentals.each do |element|
       # this_amount = 0
@@ -30,10 +30,10 @@ class Customer
 
       this_amount = element.total_fee
       #add frequent renter point
-      frequent_renter_points += 1
-      if element.movie.price_code == Movie::NEW_RELEASE && element.days_rented > 1
-        frequent_renter_points += 1
-      end
+      # frequent_renter_points += 1
+      # if element.movie.price_code == Movie::NEW_RELEASE && element.days_rented > 1
+      #   frequent_renter_points += 1
+      # end
 
       #show figures for this rental
       result += "\t" + element.move.title + "\t" + this_amount.to_s + "\n"
@@ -41,7 +41,7 @@ class Customer
 
       #add footer line
       result += "The amount you owned is #{total_amount}"
-      result += "You earned #{total_amount} frequent renter points."
+      result += "You earned #{element.frequent_rental_point} frequent renter points."
       result
     end
   end
