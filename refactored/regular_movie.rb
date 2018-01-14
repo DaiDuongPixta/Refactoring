@@ -1,5 +1,5 @@
 require 'movie'
-class Regular_movie < Movie
+class Regular_movie < Mo
   def initialize (title)
     @title = title
     @price_code = Movie::REGULAR

@@ -11,10 +11,6 @@ class Rental
   end
 
   def frequent_rental_point
-    points = 1
-    if @movie.price_code == Movie::NEW_RELEASE && @days_rented > 1
-      points += 1
-    end
-    points
+    (@movie.price_code == Movie::NEW_RELEASE && @days_rented > 1) ? 2 : 1
   end
 end

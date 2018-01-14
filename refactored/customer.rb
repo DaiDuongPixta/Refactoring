@@ -11,38 +11,24 @@ class Customer
   end
 
   def statement
-    total_amount = 0
+    frequent_rental_points = 0
     result = "Rental Record for #{@name} \n"
-    @rentals.each do |element|
-      # this_amount = 0
 
-      #determine amount for each line
-      # case element.movie.price_code
-      #   when Movie::REGULAR
-      #     this_amount += 2
-      #     this_amount += (element.days_rented - 2) * 1.5 if element.days_rented > 2
-      #   when Movie::CHILDREN
-      #     this_amount += 1.5
-      #     this_amount += (element.days_rented -3 ) * 1.5 if element.days_rented > 3
-      #   when Movie::NEW_RELEASE
-      #     this_amount += element.days_rented * 3
-      # end
-
-      this_amount = element.total_fee
-      #add frequent renter point
-      # frequent_renter_points += 1
-      # if element.movie.price_code == Movie::NEW_RELEASE && element.days_rented > 1
-      #   frequent_renter_points += 1
-      # end
-
-      #show figures for this rental
-      result += "\t" + element.move.title + "\t" + this_amount.to_s + "\n"
-      total_amount += this_amount
+    @rentals.each do |rental|
+      this_amount = rental.total_fee
+      result += "\t" + rental.move.title + "\t" + this_amount.to_s + "\n"
+      frequent_rental_points += rental.frequent_rental_point
 
       #add footer line
-      result += "The amount you owned is #{total_amount}"
-      result += "You earned #{element.frequent_rental_point} frequent renter points."
+      result += "The amount you owned is #{total_charge}."
+      result += "You earned #{frequent_rental_points} frequent renter points."
       result
     end
   end
+
+  private
+  def total_charge
+    @rentals.inject(0) {|sum, rental| sum + rental.total_fee}
+  end
+
 end
