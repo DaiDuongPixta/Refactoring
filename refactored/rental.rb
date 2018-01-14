@@ -1,4 +1,4 @@
-require 'movie'
+require_relative 'movie'
 class Rental
   attr_reader :movie, :days_rented
 
@@ -7,10 +7,10 @@ class Rental
   end
 
   def total_fee
-    @movie.calculate_fee(@days_rented)
+    @movie.charge(@days_rented)
   end
 
   def frequent_rental_point
-    (@movie.price_code == Movie::NEW_RELEASE && @days_rented > 1) ? 2 : 1
+    @movie.frequent_renter_points(@days_rented)
   end
 end

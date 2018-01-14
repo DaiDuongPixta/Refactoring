@@ -1,3 +1,4 @@
+require_relative 'movie'
 class Customer
   attr_reader :name
 
